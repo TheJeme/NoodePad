@@ -1,0 +1,93 @@
+﻿<Window x:Class="NoodePad.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:encoding="UTF-8"
+        xmlns:local="clr-namespace:NoodePad"
+        mc:Ignorable="d"
+        Title="NoodePad" Height="450" Width="800" Closing="Window_Closing">
+
+    <Window.CommandBindings>
+        <CommandBinding Command="New" CanExecute="NewCommand_Execute" Executed="NewCommand_Executed" />
+        <CommandBinding Command="Open" CanExecute="OpenCommand_Execute" Executed="OpenCommand_Executed" />
+        <CommandBinding Command="Save" CanExecute="SaveCommand_Execute" Executed="SaveCommand_Executed" />
+        <CommandBinding Command="SaveAs" CanExecute="SaveAsCommand_Execute" Executed="SaveAsCommand_Executed" />
+        <CommandBinding Command="Undo" CanExecute="UndoCommand_Execute" Executed="UndoCommand_Executed" />
+        <CommandBinding Command="Redo" CanExecute="RedoCommand_Execute" Executed="RedoCommand_Executed" />
+    </Window.CommandBindings>
+    <Grid>
+
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_File">
+                    <MenuItem x:Name="NewButton"  Command="New" />
+                    <MenuItem Command="Open" />
+                    <MenuItem Command="Save" />
+                    <MenuItem Command="SaveAs" />
+                    <Separator />
+                    <MenuItem x:Name="ExitButton" Header="_Exit" Click="ExitButton_Click" />
+                </MenuItem>
+                <MenuItem Header="_Edit">
+                    <MenuItem Command="Undo" />
+                    <MenuItem Command="Redo" />
+                    <Separator />
+                    <MenuItem Command="Cut" />
+                    <MenuItem Command="Copy" />
+                    <MenuItem Command="Paste" />
+                </MenuItem>
+                <MenuItem Header="_Format">
+                    <MenuItem Header="_Properties..." Click="MenuItem_Click" />
+                </MenuItem>
+                <MenuItem Header="_Insert">
+                    <MenuItem x:Name="DatetimeMenuItem" Header="Datetime" Click="DatetimeMenuItem_Click" />
+                </MenuItem>
+            </Menu>
+            <TabControl>
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="FirstTab" Text="New page"/>
+                        </StackPanel>
+                    </TabItem.Header>
+                    <TextBox AcceptsReturn="True" AcceptsTab="True" Name="txtEditor" TextChanged="TxtEditor_TextChanged"/>
+                </TabItem>
+                <TabItem x:Name="SecondTab"  Visibility="Hidden">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="New page" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <TextBox AcceptsReturn="True" AcceptsTab="True" Name="txtEditor2" TextChanged="TxtEditor_TextChanged"/>
+                </TabItem>
+                <TabItem x:Name="ThirdTab" Visibility="Hidden">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal" >
+                            <TextBlock Text="New page"/>
+                        </StackPanel>
+                    </TabItem.Header>
+                    <TextBox AcceptsReturn="True" AcceptsTab="True" Name="txtEditor3" TextChanged="TxtEditor_TextChanged"/>
+                </TabItem>
+                <TabItem x:Name="FourthTab" Visibility="Hidden">
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal" >
+                            <TextBlock Text="New page"/>
+                        </StackPanel>
+                    </TabItem.Header>
+                    <TextBox AcceptsReturn="True" AcceptsTab="True" Name="txtEditor4" TextChanged="TxtEditor_TextChanged"/>
+                </TabItem>
+            </TabControl>
+
+        
+                        
+                        
+                        
+                        
+                        
+        </DockPanel>
+        <DockPanel Height="14" VerticalAlignment="Bottom">
+            <Menu />
+        </DockPanel>
+        
+    </Grid>
+</Window>
