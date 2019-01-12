@@ -15,6 +15,7 @@
         <CommandBinding Command="SaveAs" CanExecute="SaveAsCommand_Execute" Executed="SaveAsCommand_Executed" />
         <CommandBinding Command="Undo" CanExecute="UndoCommand_Execute" Executed="UndoCommand_Executed" />
         <CommandBinding Command="Redo" CanExecute="RedoCommand_Execute" Executed="RedoCommand_Executed" />
+        <CommandBinding Command="Delete" CanExecute="DeleteCommand_Execute" Executed="DeleteCommand_Executed" />
     </Window.CommandBindings>
     <Grid>
 
@@ -35,6 +36,9 @@
                     <MenuItem Command="Cut" />
                     <MenuItem Command="Copy" />
                     <MenuItem Command="Paste" />
+                    <MenuItem Command="Delete" />
+                    <Separator />
+                    <MenuItem Command="SelectAll" />
                 </MenuItem>
                 <MenuItem Header="_Format">
                     <MenuItem Header="_Properties..." Click="MenuItem_Click" />
@@ -43,27 +47,55 @@
                     <MenuItem x:Name="DatetimeMenuItem" Header="Datetime" Click="DatetimeMenuItem_Click" />
                 </MenuItem>
             </Menu>
-            <TabControl>
-                <TabItem>
+            <TabControl x:Name="TabControl">
+                <TabItem x:Name="FirstTab">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock x:Name="FirstTab" Text="New page"/>
+                            <TextBlock x:Name="FirstTabName"  Text="New page" />
                         </StackPanel>
                     </TabItem.Header>
-                    <TextBox AcceptsReturn="True" AcceptsTab="True" Name="txtEditor" TextChanged="TxtEditor_TextChanged"/>
+                    <TextBox VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" AcceptsReturn="True" AcceptsTab="True" Name="txtEditor" TextChanged="TxtEditor_TextChanged">
+                        <TextBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Command="Undo"/>
+                                <MenuItem Command="Redo"/>
+                                <Separator />
+                                <MenuItem Command="Cut"/>
+                                <MenuItem Command="Copy"/>
+                                <MenuItem Command="Paste"/>
+                                <MenuItem Command="Delete"/>
+                                <Separator />
+                                <MenuItem Command="SelectAll"/>
+                            </ContextMenu>
+                        </TextBox.ContextMenu>
+                    </TextBox>
                 </TabItem>
                 <TabItem x:Name="SecondTab"  Visibility="Hidden">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="New page" />
+                            <TextBlock x:Name="SecondTabName" Text="New page" />
                         </StackPanel>
                     </TabItem.Header>
-                    <TextBox AcceptsReturn="True" AcceptsTab="True" Name="txtEditor2" TextChanged="TxtEditor_TextChanged"/>
+                    <TextBox VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" AcceptsReturn="True" AcceptsTab="True" Name="txtEditor2" TextChanged="TxtEditor_TextChanged">
+                        <TextBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Command="Undo"/>
+                                <MenuItem Command="Redo"/>
+                                <Separator />
+                                <MenuItem Command="Cut"/>
+                                <MenuItem Command="Copy"/>
+                                <MenuItem Command="Paste"/>
+                                <MenuItem Command="Delete"/>
+                                <Separator />
+                                <MenuItem Command="SelectAll"/>
+                            </ContextMenu>
+                        </TextBox.ContextMenu>
+                        </TextBox>
                 </TabItem>
                 <TabItem x:Name="ThirdTab" Visibility="Hidden">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal" >
-                            <TextBlock Text="New page"/>
+                            <TextBlock x:Name="ThirdTabName" Text="New page"/>
                         </StackPanel>
                     </TabItem.Header>
                     <TextBox AcceptsReturn="True" AcceptsTab="True" Name="txtEditor3" TextChanged="TxtEditor_TextChanged"/>
@@ -71,23 +103,16 @@
                 <TabItem x:Name="FourthTab" Visibility="Hidden">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal" >
-                            <TextBlock Text="New page"/>
+                            <TextBlock x:Name="FourthTabName" Text="New page"/>
                         </StackPanel>
                     </TabItem.Header>
                     <TextBox AcceptsReturn="True" AcceptsTab="True" Name="txtEditor4" TextChanged="TxtEditor_TextChanged"/>
                 </TabItem>
             </TabControl>
 
-        
-                        
-                        
-                        
-                        
-                        
+
         </DockPanel>
-        <DockPanel Height="14" VerticalAlignment="Bottom">
-            <Menu />
-        </DockPanel>
-        
+        <DockPanel Height="20" VerticalAlignment="Bottom"/>
+
     </Grid>
 </Window>
