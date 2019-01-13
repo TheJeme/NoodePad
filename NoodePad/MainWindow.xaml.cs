@@ -20,8 +20,11 @@ namespace NoodePad
         {
             InitializeComponent();
         }
-
+        List<string> FindBoxItems;
         bool isDataDirty = false; //If true shows warning before losing work
+        bool isFirstSearch = true;
+        string searchString;
+        int startIndex;
         string currentFileNameTab1 = null;
         string currentPathNameTab1 = null;
         string currentFileNameTab2 = null;
@@ -65,6 +68,14 @@ namespace NoodePad
                 case 3:
                     FourthTab.Visibility = Visibility.Visible;
                     tabCount++;
+                    break;
+                default:
+                    string msg = "Can't open more tabs.";
+                    MessageBox.Show(
+                    msg,
+                    "NoodePad",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
                     break;
             }   
         }
@@ -225,23 +236,72 @@ namespace NoodePad
             {
                 if (FirstTab.IsSelected == true)
                 {
-                    File.WriteAllText(currentPathNameTab1, txtEditor.Text);
-                    FirstTabName.Text = currentFileNameTab1;
+                    try
+                    {
+                        File.WriteAllText(currentPathNameTab1, txtEditor.Text);
+                        FirstTabName.Text = currentFileNameTab1;
+                    }
+                    catch (Exception)
+                    {
+                        string msg = "Saving failed!";
+                        MessageBox.Show(
+                    msg,
+                    "NoodePad",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+                    }
+
                 }
                 else if (SecondTab.IsSelected == true)
                 {
-                    File.WriteAllText(currentPathNameTab2, txtEditor2.Text);
-                    SecondTabName.Text = currentFileNameTab2;
+                    try
+                    {
+                        File.WriteAllText(currentPathNameTab2, txtEditor2.Text);
+                        FirstTabName.Text = currentFileNameTab1;
+                    }
+                    catch (Exception)
+                    {
+                        string msg = "Saving failed!";
+                        MessageBox.Show(
+                    msg,
+                    "NoodePad",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+                    }
                 }
                 else if (ThirdTab.IsSelected == true)
                 {
-                    File.WriteAllText(currentPathNameTab3, txtEditor3.Text);
-                    ThirdTabName.Text = currentFileNameTab3;
+                    try
+                    {
+                        File.WriteAllText(currentPathNameTab3, txtEditor3.Text);
+                        FirstTabName.Text = currentFileNameTab1;
+                    }
+                    catch (Exception)
+                    {
+                        string msg = "Saving failed!";
+                        MessageBox.Show(
+                    msg,
+                    "NoodePad",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+                    }
                 }
                 else if (FourthTab.IsSelected == true)
                 {
-                    File.WriteAllText(currentPathNameTab4, txtEditor4.Text);
-                    FourthTabName.Text = currentFileNameTab4;
+                    try
+                    {
+                        File.WriteAllText(currentPathNameTab4, txtEditor4.Text);
+                        FirstTabName.Text = currentFileNameTab1;
+                    }
+                    catch (Exception)
+                    {
+                        string msg = "Saving failed!";
+                        MessageBox.Show(
+                    msg,
+                    "NoodePad",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+                    }
                 }
             }
 
@@ -387,6 +447,213 @@ namespace NoodePad
             {
                 txtEditor4.SelectedText = "";
             }
+        }
+
+        private void TxtEditor_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (e.Delta > 0 && Keyboard.Modifiers == ModifierKeys.Control)
+                try
+                {
+                    txtEditor.FontSize += 1;
+                }
+                catch (Exception)
+                {
+                    return;
+                } 
+            else if (e.Delta < 0 && Keyboard.Modifiers == ModifierKeys.Control)
+                try
+                {
+                    txtEditor.FontSize -= 1;
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+        }
+        private void TxtEditor2_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (e.Delta > 0 && Keyboard.Modifiers == ModifierKeys.Control)
+                try
+                {
+                    txtEditor2.FontSize += 1;
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+            else if (e.Delta < 0 && Keyboard.Modifiers == ModifierKeys.Control)
+                try
+                {
+                    txtEditor2.FontSize -= 1;
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+        }
+        private void TxtEditor3_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (e.Delta > 0 && Keyboard.Modifiers == ModifierKeys.Control)
+                try
+                {
+                    txtEditor3.FontSize += 1;
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+            else if (e.Delta < 0 && Keyboard.Modifiers == ModifierKeys.Control)
+                try
+                {
+                    txtEditor3.FontSize -= 1;
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+        }
+        private void TxtEditor4_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (e.Delta > 0 && Keyboard.Modifiers == ModifierKeys.Control)
+                try
+                {
+                    txtEditor4.FontSize += 1;
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+            else if (e.Delta < 0 && Keyboard.Modifiers == ModifierKeys.Control)
+                try
+                {
+                    txtEditor4.FontSize -= 1;
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+        }
+
+        private void FindCommand_Execute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void FindCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (FindPanel.Visibility == Visibility.Hidden)
+            {
+                FindComboBox.Items.Add(FirstTabName.Text.ToString());
+                FindComboBox.Items.Add(SecondTabName.Text.ToString());
+                FindComboBox.Items.Add(ThirdTabName.Text.ToString());
+                FindComboBox.Items.Add(FourthTabName.Text.ToString());
+                FindComboBox.SelectedIndex = 0;
+                FindPanel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                FindPanel.Visibility = Visibility.Hidden;
+                FindComboBox.Items.Clear();
+            }
+
+        }
+
+        private void FindButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtEditor.Text.Contains(FindText.Text) && isFirstSearch == true && FindComboBox.SelectedIndex == 0)
+            {
+                txtEditor.Focus();
+                searchString = FindText.Text;
+                startIndex = txtEditor.Text.IndexOf(searchString);
+                txtEditor.Select(startIndex, searchString.Length);
+                isFirstSearch = false;
+            }
+            else if (txtEditor.Text.Contains(FindText.Text) && FindComboBox.SelectedIndex == 0)
+            {
+                txtEditor.Focus();
+                startIndex = txtEditor.Text.IndexOf(searchString, startIndex + searchString.Length);
+                try
+                {
+                    txtEditor.Select(startIndex, searchString.Length);
+                }
+                catch
+                {
+                    return;
+                }
+            }
+            else if (txtEditor2.Text.Contains(FindText.Text) && isFirstSearch == true && FindComboBox.SelectedIndex == 1)
+            {
+                txtEditor2.Focus();
+                searchString = FindText.Text;
+                startIndex = txtEditor2.Text.IndexOf(searchString);
+                txtEditor2.Select(startIndex, searchString.Length);
+                isFirstSearch = false;
+            }
+            else if (txtEditor2.Text.Contains(FindText.Text) && FindComboBox.SelectedIndex == 1)
+            {
+                txtEditor2.Focus();
+                startIndex = txtEditor2.Text.IndexOf(searchString, startIndex + searchString.Length);
+                try
+                {
+                    txtEditor2.Select(startIndex, searchString.Length);
+                }
+                catch
+                {
+                    return;
+                }
+            }
+            else if (txtEditor3.Text.Contains(FindText.Text) && isFirstSearch == true && FindComboBox.SelectedIndex == 2)
+            {
+                txtEditor3.Focus();
+                searchString = FindText.Text;
+                startIndex = txtEditor3.Text.IndexOf(searchString);
+                txtEditor3.Select(startIndex, searchString.Length);
+                isFirstSearch = false;
+            }
+            else if (txtEditor3.Text.Contains(FindText.Text) && FindComboBox.SelectedIndex == 2)
+            {
+                txtEditor3.Focus();
+                startIndex = txtEditor3.Text.IndexOf(searchString, startIndex + searchString.Length);
+                try
+                {
+                    txtEditor3.Select(startIndex, searchString.Length);
+                }
+                catch
+                {
+                    return;
+                }
+            }
+            else if (txtEditor4.Text.Contains(FindText.Text) && isFirstSearch == true && FindComboBox.SelectedIndex == 3)
+            {
+                txtEditor4.Focus();
+                searchString = FindText.Text;
+                startIndex = txtEditor4.Text.IndexOf(searchString);
+                txtEditor4.Select(startIndex, searchString.Length);
+                isFirstSearch = false;
+            }
+            else if (txtEditor2.Text.Contains(FindText.Text) && FindComboBox.SelectedIndex == 3)
+            {
+                txtEditor4.Focus();
+                startIndex = txtEditor4.Text.IndexOf(searchString, startIndex + searchString.Length);
+                try
+                {
+                    txtEditor4.Select(startIndex, searchString.Length);
+                }
+                catch
+                {
+                    return;
+                }
+            }
+        }
+
+        private void FindText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            isFirstSearch = true;
+        }
+
+        private void FindComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            isFirstSearch = true;
         }
     }
 }

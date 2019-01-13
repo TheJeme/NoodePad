@@ -41,10 +41,16 @@ namespace NoodePad
             if (ItalicBox.IsChecked == true)
             {
                 (this.Owner as MainWindow).txtEditor.FontStyle = FontStyles.Italic;
+                (this.Owner as MainWindow).txtEditor2.FontStyle = FontStyles.Italic;
+                (this.Owner as MainWindow).txtEditor3.FontStyle = FontStyles.Italic;
+                (this.Owner as MainWindow).txtEditor4.FontStyle = FontStyles.Italic;
             }
             else
             {
                 (this.Owner as MainWindow).txtEditor.FontStyle = FontStyles.Normal;
+                (this.Owner as MainWindow).txtEditor2.FontStyle = FontStyles.Normal;
+                (this.Owner as MainWindow).txtEditor3.FontStyle = FontStyles.Normal;
+                (this.Owner as MainWindow).txtEditor4.FontStyle = FontStyles.Normal;
             }
         }
 
@@ -53,10 +59,16 @@ namespace NoodePad
             if (BoldBox.IsChecked == true)
             {
                 (this.Owner as MainWindow).txtEditor.FontWeight = FontWeights.Bold;
+                (this.Owner as MainWindow).txtEditor2.FontWeight = FontWeights.Bold;
+                (this.Owner as MainWindow).txtEditor3.FontWeight = FontWeights.Bold;
+                (this.Owner as MainWindow).txtEditor4.FontWeight = FontWeights.Bold;
             }
             else
             {
                 (this.Owner as MainWindow).txtEditor.FontWeight = FontWeights.Normal;
+                (this.Owner as MainWindow).txtEditor2.FontWeight = FontWeights.Normal;
+                (this.Owner as MainWindow).txtEditor3.FontWeight = FontWeights.Normal;
+                (this.Owner as MainWindow).txtEditor4.FontWeight = FontWeights.Normal;
             }
         }
 
@@ -65,16 +77,25 @@ namespace NoodePad
             if (UnderlinedBox.IsChecked == true)
             {
                 (this.Owner as MainWindow).txtEditor.TextDecorations = TextDecorations.Underline;
+                (this.Owner as MainWindow).txtEditor2.TextDecorations = TextDecorations.Underline;
+                (this.Owner as MainWindow).txtEditor3.TextDecorations = TextDecorations.Underline;
+                (this.Owner as MainWindow).txtEditor4.TextDecorations = TextDecorations.Underline;
             }
             else
             {
                 (this.Owner as MainWindow).txtEditor.TextDecorations = null;
+                (this.Owner as MainWindow).txtEditor2.TextDecorations = null;
+                (this.Owner as MainWindow).txtEditor3.TextDecorations = null;
+                (this.Owner as MainWindow).txtEditor4.TextDecorations = null;
             }
         }
 
         private void FontSizeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             (this.Owner as MainWindow).txtEditor.FontSize = Convert.ToDouble(FontSizeBox.SelectedItem);
+            (this.Owner as MainWindow).txtEditor2.FontSize = Convert.ToDouble(FontSizeBox.SelectedItem);
+            (this.Owner as MainWindow).txtEditor3.FontSize = Convert.ToDouble(FontSizeBox.SelectedItem);
+            (this.Owner as MainWindow).txtEditor4.FontSize = Convert.ToDouble(FontSizeBox.SelectedItem);
         }
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
@@ -86,6 +107,9 @@ namespace NoodePad
         {
             var font = FontFamilyBox.SelectedValue.ToString();
             (this.Owner as MainWindow).txtEditor.FontFamily = new FontFamily(font);
+            (this.Owner as MainWindow).txtEditor2.FontFamily = new FontFamily(font);
+            (this.Owner as MainWindow).txtEditor3.FontFamily = new FontFamily(font);
+            (this.Owner as MainWindow).txtEditor4.FontFamily = new FontFamily(font);
         }
     }
 }

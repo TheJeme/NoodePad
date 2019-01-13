@@ -6,6 +6,7 @@
         xmlns:encoding="UTF-8"
         xmlns:local="clr-namespace:NoodePad"
         mc:Ignorable="d"
+        Icon="D:\KOODAUS\C#\Work In Progress\NoodePad\Goescat-Macaron-Text-editor.ico"
         Title="NoodePad" Height="450" Width="800" Closing="Window_Closing">
 
     <Window.CommandBindings>
@@ -16,6 +17,7 @@
         <CommandBinding Command="Undo" CanExecute="UndoCommand_Execute" Executed="UndoCommand_Executed" />
         <CommandBinding Command="Redo" CanExecute="RedoCommand_Execute" Executed="RedoCommand_Executed" />
         <CommandBinding Command="Delete" CanExecute="DeleteCommand_Execute" Executed="DeleteCommand_Executed" />
+        <CommandBinding Command="Find" CanExecute="FindCommand_Execute" Executed="FindCommand_Executed" />
     </Window.CommandBindings>
     <Grid>
 
@@ -36,9 +38,10 @@
                     <MenuItem Command="Cut" />
                     <MenuItem Command="Copy" />
                     <MenuItem Command="Paste" />
-                    <MenuItem Command="Delete" />
                     <Separator />
+                    <MenuItem Command="Delete" />
                     <MenuItem Command="SelectAll" />
+                    <MenuItem Command="Find" />
                 </MenuItem>
                 <MenuItem Header="_Format">
                     <MenuItem Header="_Properties..." Click="MenuItem_Click" />
@@ -51,10 +54,10 @@
                 <TabItem x:Name="FirstTab">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock x:Name="FirstTabName"  Text="New page" />
+                            <TextBlock x:Name="FirstTabName" Text="New page 1" />
                         </StackPanel>
                     </TabItem.Header>
-                    <TextBox VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" AcceptsReturn="True" AcceptsTab="True" Name="txtEditor" TextChanged="TxtEditor_TextChanged">
+                    <TextBox  FontSize="24" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" AcceptsReturn="True" AcceptsTab="True" Name="txtEditor" TextChanged="TxtEditor_TextChanged" PreviewMouseWheel="TxtEditor_PreviewMouseWheel">
                         <TextBox.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Command="Undo"/>
@@ -73,10 +76,10 @@
                 <TabItem x:Name="SecondTab"  Visibility="Hidden">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock x:Name="SecondTabName" Text="New page" />
+                            <TextBlock x:Name="SecondTabName" Text="New page 2" />
                         </StackPanel>
                     </TabItem.Header>
-                    <TextBox VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" AcceptsReturn="True" AcceptsTab="True" Name="txtEditor2" TextChanged="TxtEditor_TextChanged">
+                    <TextBox FontSize="24" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" AcceptsReturn="True" AcceptsTab="True" Name="txtEditor2" TextChanged="TxtEditor_TextChanged" PreviewMouseWheel="TxtEditor2_PreviewMouseWheel">
                         <TextBox.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Command="Undo"/>
@@ -90,29 +93,48 @@
                                 <MenuItem Command="SelectAll"/>
                             </ContextMenu>
                         </TextBox.ContextMenu>
-                        </TextBox>
+                    </TextBox>
                 </TabItem>
                 <TabItem x:Name="ThirdTab" Visibility="Hidden">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal" >
-                            <TextBlock x:Name="ThirdTabName" Text="New page"/>
+                            <TextBlock x:Name="ThirdTabName" Text="New page 3"/>
                         </StackPanel>
                     </TabItem.Header>
-                    <TextBox AcceptsReturn="True" AcceptsTab="True" Name="txtEditor3" TextChanged="TxtEditor_TextChanged"/>
+                    <TextBox FontSize="24" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" AcceptsReturn="True" AcceptsTab="True" Name="txtEditor3" TextChanged="TxtEditor_TextChanged" PreviewMouseWheel="TxtEditor3_PreviewMouseWheel"/>
                 </TabItem>
                 <TabItem x:Name="FourthTab" Visibility="Hidden">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal" >
-                            <TextBlock x:Name="FourthTabName" Text="New page"/>
+                            <TextBlock x:Name="FourthTabName" Text="New page 4"/>
                         </StackPanel>
                     </TabItem.Header>
-                    <TextBox AcceptsReturn="True" AcceptsTab="True" Name="txtEditor4" TextChanged="TxtEditor_TextChanged"/>
+                    <TextBox FontSize="24" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" AcceptsReturn="True" AcceptsTab="True" Name="txtEditor4" TextChanged="TxtEditor_TextChanged" PreviewMouseWheel="TxtEditor4_PreviewMouseWheel">
+                        <TextBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Command="Undo"/>
+                                <MenuItem Command="Redo"/>
+                                <Separator />
+                                <MenuItem Command="Cut"/>
+                                <MenuItem Command="Copy"/>
+                                <MenuItem Command="Paste"/>
+                                <MenuItem Command="Delete"/>
+                                <Separator />
+                                <MenuItem Command="SelectAll"/>
+                            </ContextMenu>
+                        </TextBox.ContextMenu>
+                    </TextBox>
                 </TabItem>
             </TabControl>
-
-
         </DockPanel>
-        <DockPanel Height="20" VerticalAlignment="Bottom"/>
+        <DockPanel x:Name="FindPanel" Visibility="Hidden" Background="AliceBlue" HorizontalAlignment="Right" Height="150" LastChildFill="False" Margin="0,60,50,0" VerticalAlignment="Top" Width="199">
+            <TextBox x:Name="FindText" FontSize="15" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" Margin="10,50,0,0" TextChanged="FindText_TextChanged"/>
+            <Button x:Name="FindButton" Content="Find" Height="25" VerticalAlignment="Top" Width="55" Margin="10,50,0,0" Click="FindButton_Click"/>
+            <Label Content="Find" FontSize="20" Height="35" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="181" Margin="-185,5,10,0"/>
+            <Border BorderBrush="Black" BorderThickness="2" Height="150" VerticalAlignment="Top" Width="199" Margin="-196,0,0,0"/>
+            <ComboBox x:Name="FindComboBox" FontSize="17" Height="30" VerticalAlignment="Top" Width="180" Margin="-199,90,0,2" SelectionChanged="FindComboBox_SelectionChanged">
+            </ComboBox>
+        </DockPanel>
 
     </Grid>
 </Window>
